@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pizza Lovers Paradise</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1><span class="rgb">Pizza Lovers Website</span><span class="emoji">🍕</span></h1>
+    <p>(PLW gang) yummy !</p>
+  </header>
+  <div class="container">
+    <div class="card">
+      <h2>Why I love pizza</h2>
+      <p>Because it's delicious and I love Italy!</p>
+    </div>
+    <div class="card">
+      <h2>My dream pizza (nice pic)</h2>
+      <img class="responsive-img" src="https://images.unsplash.com/photo-1644398324665-57647e829ca2?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=mary-andrusenko-pGARaa8KzDI-unsplash.jpg" width="400" height="400" alt="Delicious pizza" />
+    </div>
+  </div>
+
+  <div class="card" style="margin: 2rem;">
+    <h2>🍕 Classic margherita recipe</h2>
+    <ul>
+      <li>1 pizza dough base</li>
+      <li>1/2 cup crushed tomatoes</li>
+      <li>Fresh mozzarella slices</li>
+      <li>Fresh basil leaves</li>
+      <li>Olive oil and salt</li>
+    </ul>
+    <p>Spread the tomatoes on the dough, add mozzarella and basil, drizzle olive oil, bake at 220°C for 10-12 minutes. Buon appetito!</p>
+  </div>
+
+  <section class="form-section">
+    <h2>💌 Send a love letter to pizza!</h2>
+    <form id="loveForm">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" placeholder="Pizza Fan #1" required />
+
+      <label for="message">Your Message</label>
+      <textarea id="message" name="message" rows="4" placeholder="Dear Pizza, you complete me..." required></textarea>
+
+      <button type="submit" id="submitButton">send ✨</button>
+    </form>
+  </section>
+
+  <footer>
+    Made in France with pizza 🍕
+  </footer>
+
+  <script>
+    const numberOfPizzas = 30;
+    for (let i = 0; i < numberOfPizzas; i++) {
+      const pizza = document.createElement('div');
+      pizza.classList.add('pizza-emoji');
+      pizza.textContent = '🍕';
+      pizza.style.left = Math.random() * 100 + 'vw';
+      pizza.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      document.body.appendChild(pizza);
+    }
+
+    document.getElementById('loveForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const nameInput = document.getElementById('name');
+      const messageInput = document.getElementById('message');
+      const submitButton = document.getElementById('submitButton');
+
+      nameInput.value = '';
+      messageInput.value = '';
+
+      submitButton.textContent = 'sent! 🧀';
+      submitButton.disabled = true;
+
+      const buttonRect = submitButton.getBoundingClientRect();
+      for (let i = 0; i < 20; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = (buttonRect.left + buttonRect.width / 2 + (Math.random() - 0.5) * 100) + 'px';
+        confetti.style.top = (buttonRect.top + window.scrollY + (Math.random() - 0.5) * 40) + 'px';
+        confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 1200);
+      }
+
+      setTimeout(() => {
+        submitButton.textContent = 'send love to pizza ❤️';
+        submitButton.disabled = false;
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
